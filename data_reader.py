@@ -6,5 +6,19 @@ def import_csv(data_path):
     y = data['sentiment']
     return y, docs
 
-def save_to_file(file_path):
-    
+def save_data_to_txt_file(filename, labels, data):
+    file = open(filename, 'w')
+    for i in range(0, len(labels)):
+        file.write("%s\n" % labels[i])
+        file.write("%s\n" % data[i])
+
+def read_data_from_txt_file(filname):
+    with open(filname, "r") as dats:
+        ys = []
+        docs = []
+        for i, line in enumerate(dats):
+            if i % 2 == 0:
+                ys.append(line)
+            else:
+                docs.append(line)
+        return ys, docs

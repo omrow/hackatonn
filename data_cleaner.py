@@ -80,6 +80,24 @@ class WordTokenizer(object):
         str_words = [term for term in str_words if term not in stop]
         return str_words
 
+def negation_unigrams(tokens):
+    """
+        Function making negation for unigrams
+        :param tokens: list with words
+    """
+    negation_dct = ["n't", "not", "never", "no", "neither", "nor", "none", "Not", "Never", "No", "Neither", "None"]
+    doc_len = len(tokens)
+    for idx in range(doc_len):
+        if tokens[idx] in negation_dct:
+            if idx == 0:
+                tokens[idx + 1] = "!{}".format(tokens[idx + 1])
+            elif idx == doc_len - 1:
+                tokens[idx - 1] = "!{}".format(tokens[idx - 1])
+            else:
+                tokens[idx + 1] = "!{}".format(tokens[idx + 1])
+                tokens[idx - 1] = "!{}".format(tokens[idx - 1])
+    return tokens
+
 def get_lemmatized_words(words):
     lmtzr = WordNetLemmatizer()
     morphy_tag = {'NN': wordnet.NOUN, 'JJ': wordnet.ADJ, 'VB': wordnet.VERB, 'RB': wordnet.ADV}
