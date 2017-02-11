@@ -7,6 +7,7 @@ from sklearn.decomposition import PCA
 from sklearn.decomposition import IncrementalPCA
 from scipy import sparse
 import numpy as np
+import core
 
 ngram_min = 1
 ngram_max = 1

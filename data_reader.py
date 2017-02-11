@@ -22,3 +22,10 @@ def read_data_from_txt_file(filname):
             else:
                 docs.append(line)
         return ys, docs
+
+def read_test_data(path):
+    with open(path, 'r') as post_table:
+        posts = post_table.readlines()
+        posts = [line.split('|') for line in posts]
+        posts = [sub_list[4] for sub_list in posts]
+    return posts

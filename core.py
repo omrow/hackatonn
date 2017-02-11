@@ -30,3 +30,14 @@ def test_different_classifiers(train_authors, train_data, folds=10, shuffle_=Fal
                 results['rec'].append(metrics.recall_score(y_test, predicted, average='weighted'))
                 results['f1'].append(metrics.f1_score(y_test, predicted, average='weighted'))
         print (name, ': Accuracy: %s, F1-measure: %s, Predicted: %s' % (np.mean(results['acc']), np.mean(results['f1']), np.mean(results['prec'])))
+
+def train_classifier(train_labels, train_data):
+    train_data = np.asarray(train_data)
+    train_labels = np.asarray(train_labels)
+    clf = linear_model.LogisticRegression()
+    clf = clf.fit(train_data, train_labels)
+    return clf
+
+def test_classifier(test_data, clf):
+    predicted = clf.predict(test_data)
+    return predicted
